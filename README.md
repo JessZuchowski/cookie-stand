@@ -1,1 +1,3 @@
 # cookie-stand
+This is a daily sales projection for Pat's salmon cookies. I have calculated hourly totals for each store utilizing _helper functions and Math.random along with Pat's estimates of minimum and maximum customers and average cookies per customer. 
+Each store is it's own object with multipe elements. Functions were created to calculate cookies sold per hour. These values were pushed into arrays and rendered to the index page. 
