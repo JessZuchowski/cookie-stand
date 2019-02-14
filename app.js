@@ -27,6 +27,42 @@ Store objects {
     render
 }
 */
+
+var Cookie_stand = function (min_cust, max_cust, avg_cookies_per_customer, store_name, store_open, store_close, cookies_sold_each_hour){
+  this.min_cust = min_cust;
+  this.max_cust = max_cust; 
+  this.avg_cookies_per_customer = avg_cookies_per_customer;
+  this.store_name = store_name;
+  this.store_open = store_open; 
+  this.store_close = store_close;
+  this.cookies_sold_each_hour = cookies_sold_each_hour;
+};
+//The var function is an object constructor with 7 parameters. Each sets the value of a property within the object. 
+this.Cookie_stand.prototype.render = function (){
+  var target = document.getElementById('store-container');
+  var tr_el = document.createElement('tr');
+  var td_el = document.createElement('td');
+//creates a method to be rendered and uses Id from HTML (store-container) and creates elements within that target. Renders to page. 
+
+function makeRows() {
+  var row = ('<tr></tr>');
+  row.append('<td></td>').textContent = this.min_cust;
+}
+
+};    
+
+//still need to add table data elements with text content for each parameter.
+
+//=======init
+
+var Pike = new Cookie_stand(23, 65, 6.3, '1st and Pike', 8, 19);
+Pike.render();
+//takes the object and asigns a new keyword to call the constructor function. includes values used in the properties of the object. 
+
+
+
+
+/*
 //=======Store Location: 1st and Pike
 var Pike = {
   min_cust : 23,
@@ -271,3 +307,4 @@ SeaTac.render();
 
 Seattle.calculate_cookies_sold_each_hour();
 Seattle.render();
+*/
