@@ -2,7 +2,7 @@
 
 // helper functions
 
-var _random = function(min, max){
+var _random = function(min, max) {
   return Math.random()*(max - min) + min; 
 };
 
@@ -17,8 +17,8 @@ Store objects {
     max_cust
     avg_cookies_per_customer (per means individual customer)
     store_name
-    store_open: 0800 
-    store_close: 1900
+    store_open: 0600 
+    store_close: 2000
 
     cookies_sold_each_hour (each means collection so this will be an array [])
 
@@ -28,36 +28,113 @@ Store objects {
 }
 */
 
-var Cookie_stand = function (min_cust, max_cust, avg_cookies_per_customer, store_name, store_open, store_close, cookies_sold_each_hour){
+var Cookie_stand = function (store_name, min_cust, max_cust, avg_cookies_per_cust, store_open, store_close){
+  this.store_name = store_name;
   this.min_cust = min_cust;
   this.max_cust = max_cust; 
-  this.avg_cookies_per_customer = avg_cookies_per_customer;
-  this.store_name = store_name;
+  this.avg_cookies_per_cust = avg_cookies_per_cust;
   this.store_open = store_open; 
   this.store_close = store_close;
-  this.cookies_sold_each_hour = cookies_sold_each_hour;
+  this.cookies_sold_each_hour = [];
+  this.avg_cookies_per_cust = avg_cookies_per_cust || 6.3; 
 };
+
+Cookie_stand.prototype.cookies_per_hour = function () {
+  var random_cust = Math.floor(_random(this.min_cust, this.max_cust));
+  return Math.floor(this.avg_cookies_per_cust * random_cust);
+};
+
+Cookie_stand.prototype.calculate_cookies_sold_each_hour = function () {
+  for (var i = 6; i < 20; i++) {
+    var cookies_sold = this.cookies_per_hour();
+    this.cookies_sold_each_hour.push(cookies_sold);
+  }
+};
+
+var render_one_stores_table = function() {
+  this.calculate_cookies_sold_each_hour();
+  var target = document.getElementById('store-table');
+
+  var store_row = document.createElement('tr');
+
+  var name_td = document.createElement('td');
+  name_td.textContent = this.store_name; 
+  store_row.appendChild(name_td);
+
+  for (var i = 0; i < this.cookies_sold_each_hour.length; i++) {
+    var cookie_hour_td = document.createElement('td');
+    cookie_hour_td.textContent = this.cookies_sold_each_hour[i];
+    store_row.appendChild(cookie_hour_td);
+  }
+  
+ 
+  target.appendChild(store_row);
+};
+
+Cookie_stand.prototype.render_as_a_table_row = render_one_stores_table;
 //The var function is an object constructor with 7 parameters. Each sets the value of a property within the object. 
-this.Cookie_stand.prototype.render = function (){
-  var target = document.getElementById('store-container');
+Cookie_stand.prototype.render = function() {
+  this.calculate_cookies_sold_each_hour();
+
+  var target = document.getElementById('store-table');
   var tr_el = document.createElement('tr');
   var td_el = document.createElement('td');
 //creates a method to be rendered and uses Id from HTML (store-container) and creates elements within that target. Renders to page. 
 
-function makeRows() {
-  var row = ('<tr></tr>');
-  row.append('<td></td>').textContent = this.min_cust;
-}
+  td_el.textContent = this.store_name;
+  tr_el.appendChild(td_el);
 
-};    
+  td_el = document.createElement('td');
+  td_el.textContent = this.min_cust;
+  tr_el.appendChild(td_el);
+
+  td_el = document.createElement('td');
+  td_el.textContent = this.max_cust;
+  tr_el.appendChild(td_el);
+
+  td_el = document.createElement('td');
+  td_el.textContent = this.avg_cookies_per_cust;
+  tr_el.appendChild(td_el);
+
+  td_el = document.createElement('td');
+  td_el.textContent = this.store_open;
+  tr_el.appendChild(td_el);
+
+  td_el = document.createElement('td');
+  td_el.textContent = this.store_close;
+  tr_el.appendChild(td_el);
+
+
+
+  for(var i = 0; i < this.cookies_sold_each_hour.length; i++){
+    td_el = document.createElement('td');
+    td_el.textContent = this.cookies_sold_each_hour[i];
+    tr_el.appendChild(td_el);
+  }
+//iterates for each hour to add array value to table. 
+
+  target.appendChild(tr_el);
+};  
 
 //still need to add table data elements with text content for each parameter.
 
 //=======init
 
-var Pike = new Cookie_stand(23, 65, 6.3, '1st and Pike', 8, 19);
-Pike.render();
+var pike_store = new Cookie_stand(23, 65, 6.3, '1st and Pike', 6, 20);
+var seatac_store = new Cookie_stand(3, 24, 1.2, 'SeaTac', 6, 20);
+var seattle_center_store = new Cookie_stand(11, 38, 3.7, 'Seattle Center', 6, 20);
+var cap_hill_store = new Cookie_stand(20, 38, 2.3, 'Capitol Hill', 6, 20);
+var alki_store = new Cookie_stand(2, 16, 4.6, 'Alki', 6, 20);
+//pike_store.render();
 //takes the object and asigns a new keyword to call the constructor function. includes values used in the properties of the object. 
+
+var all_stores = [pike_store, seatac_store, seattle_center_store, cap_hill_store, alki_store];
+for(var i = 0; i < all_stores.length; i++){
+  all_stores[i].render_as_a_table_row();
+}
+
+//pike_store.calculate_cookies_sold_each_hour();
+//render_all_stores_table();
 
 
 
