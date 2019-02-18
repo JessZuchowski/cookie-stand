@@ -1,11 +1,112 @@
-#store-container {
-    background-color: slategray;
+
+
+body {
+    background-color: rgb(217, 240, 239);
+}
+div{
+    margin: 50px 200px 50px 200px;
+}
+p {
+    display: block;
+    font-family: sans-serif;
+    color: #2b3d3d;
+    font-weight: bold;
+    
+}
+h1 { 
+    color: #2b3d3d;
+    font-family: sans-serif; 
+    text-align: center; 
+    font-size: 50px;
+}
+h2 {
+    color: #2b3d3d;
+    font-family: sans-serif;  
+    text-align: center;
+    font-size: 40px;
+}
+ul#Header > li {
+    display: inline;
+}
+ul#store-container {
+    color: rgb(21, 75, 92);
+    font-family: sans-serif;
+    text-align: center;
+}
+ul#salmon-line > li {
+    display: inline;
+}
+table#locations {
+    display: block;
+    font-family: sans-serif;
+    color: #2b3d3d;
+}
+table#store-table {
+    padding: .3em;
+    background-color: rgb(252, 250, 245);
+    border-style: groove;
+    border-color: rgb(12, 40, 49) rgb(37, 51, 56);
+
 }
 
-table {
-    padding: .3em;
+th#store-table {
+    background-color: rgb(252, 250, 245);
+    border-style: groove;
+    border-color: rgb(12, 40, 49) rgb(37, 51, 56);
 }
 
 td {
     padding: .2em;
+}
+
+table#locations {
+    display: inline-block;
+}
+button#chinook { 
+    background: url('../img/chinook.jpg') 30%  rgb(69, 101, 107);
+    color: white;
+    width: 180px;
+    height: 60px;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+
+}
+a#link:link, a#link:visited {
+    color: white;
+}
+
+img.align-left {
+    float: left;
+    margin-right: 30px;
+}
+
+img.align-right {
+    float: right;
+    margin-left: 30px;
+}
+
+img.medium {
+    height: 200px;
+}
+img.small {
+    height: 200px;
+}
+img#salmon {
+    width: 100px;
+}
+hr {
+    border-style: dotted;
+    border-width: thick;
+    border-color:  rgb(69, 101, 107);
+    width: 250px;
+}
+form {
+    display: block;
+    font-family: sans-serif;
+    color: #2b3d3d;
+    font-weight: bold;
+}
+img#store {
+    height: 100px;
 }
